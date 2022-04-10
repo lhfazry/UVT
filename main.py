@@ -4,11 +4,13 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--datasets", type=str, default="datasets", help="Path ke datasets")
+parser.add_argument("--attention_heads", type=str, default="16", help="Attention Heads")
 params = parser.parse_args()
 
 if __name__ == '__main__':
 
     dataset_path = params.datasets
+    attention_heads = params.attention_heads
 
     Network.train(  dataset_path=dataset_path,  # path to the dataset folder containing the "Videos" foldes and "FileList.csv" file
                     num_epochs=5,               # number of epoch to train
@@ -28,7 +30,7 @@ if __name__ == '__main__':
                     intermediate_size = 8192,   # size of the main MLP inside of the Transformers
                     rm_branch = None,           # select branch to not train: None, 'SD', 'EF'
                     use_conv = False,           # use convolutions instead of MLP for the regressors - worse results
-                    attention_heads = 16,        # number of attention heads in each Transformer
+                    attention_heads = attention_heads,        # number of attention heads in each Transformer
                     num_data = [200, 40]
                     )
     
