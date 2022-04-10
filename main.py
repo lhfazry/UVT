@@ -4,7 +4,7 @@ import Network
 
 if __name__ == '__main__':
 
-    dataset_path = "/content/"
+    dataset_path = "/content/datasets"
 
     Network.train(  dataset_path=dataset_path,  # path to the dataset folder containing the "Videos" foldes and "FileList.csv" file
                     num_epochs=5,               # number of epoch to train
