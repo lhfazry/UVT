@@ -4,7 +4,8 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--datasets", type=str, default="datasets", help="Path ke datasets")
-parser.add_argument("--attention_heads", type=str, default="16", help="Attention Heads")
+parser.add_argument("--attention_heads", type=int, default="16", help="Attention Heads")
+
 params = parser.parse_args()
 
 if __name__ == '__main__':
