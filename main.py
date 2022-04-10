@@ -28,7 +28,8 @@ if __name__ == '__main__':
                     intermediate_size = 8192,   # size of the main MLP inside of the Transformers
                     rm_branch = None,           # select branch to not train: None, 'SD', 'EF'
                     use_conv = False,           # use convolutions instead of MLP for the regressors - worse results
-                    attention_heads = 16        # number of attention heads in each Transformer
+                    attention_heads = 16,        # number of attention heads in each Transformer
+                    num_data = [200, 40]
                     )
     
     # Parameters must match train-time parameters, or the weight files wont load
@@ -39,5 +40,6 @@ if __name__ == '__main__':
                     num_hidden_layers=16,       # Number of Transformers
                     intermediate_size=8192,     # Size of the main MLP inside of the Transformers
                     model_path="./output/UVT_repeat_reg",# path of trained weight
-                    device=[0]
+                    device=[0],
+                    num_data = [40]
                     )

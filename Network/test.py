@@ -29,7 +29,8 @@ def test(   dataset_path,
             use_conv=False, 
             attention_heads=16, 
             model_path=None, 
-            device=[0]
+            device=[0],
+            num_data = [40]
             ):
     
     print("Testing on", SDmode, DTmode, use_full_videos)
@@ -70,7 +71,7 @@ def test(   dataset_path,
     model.eval()
 
     # Load data
-    dataset = EchoSet(dataset_path, split="test", min_spacing=10, max_length=fixed_length, fixed_length=fixed_length, pad=8, random_clip=False, dataset_mode=dsdtmode, SDmode = SDmode)
+    dataset = EchoSet(dataset_path, split="test", min_spacing=10, max_length=fixed_length, fixed_length=fixed_length, pad=8, random_clip=False, dataset_mode=dsdtmode, SDmode = SDmode, num_data=num_data[0])
     
     loader = torch.utils.data.DataLoader(dataset, batch_size=1, num_workers=0, shuffle=False)
     

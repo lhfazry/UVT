@@ -36,7 +36,8 @@ def train(  dataset_path,
             intermediate_size = 8192,
             rm_branch = None, # SD / EF / None
             use_conv = False,
-            attention_heads = 16
+            attention_heads = 16,
+            num_data = [200, 40]
             ):
     
     # Seed RNGs
@@ -83,7 +84,8 @@ def train(  dataset_path,
                             pad=8,
                             random_clip=False,
                             dataset_mode=DTmode,
-                            SDmode = SDmode)
+                            SDmode = SDmode,
+                            num_data=num_data[0])
     val_set   = EchoSet(  root=dataroot,
                             split="val",
                             min_spacing=ds_min_spacing,
@@ -92,7 +94,8 @@ def train(  dataset_path,
                             pad=8,
                             random_clip=False,
                             dataset_mode=DTmode,
-                            SDmode = SDmode)
+                            SDmode = SDmode,
+                            num_data=num_data[1])
     train_dataloader = torch.utils.data.DataLoader(train_set, batch_size=batch_size, num_workers=0, shuffle=True, pin_memory=(device.type == "cuda"), drop_last=True)
     val_dataloader   = torch.utils.data.DataLoader(val_set,   batch_size=batch_size, num_workers=0, shuffle=True, pin_memory=(device.type == "cuda"), drop_last=True)
     dataloaders = {'train': train_dataloader, 'val': val_dataloader}

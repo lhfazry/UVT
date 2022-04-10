@@ -18,7 +18,8 @@ class EchoSet(torch.utils.data.Dataset):
                  pad=8,
                  random_clip=False,
                  dataset_mode='repeat',
-                 SDmode = 'reg' # reg, cla
+                 SDmode = 'reg', # reg, cla,
+                 num_data = None
                  ):
 
         self.folder       = pathlib.Path(root)
@@ -31,6 +32,7 @@ class EchoSet(torch.utils.data.Dataset):
         self.random_clip  = random_clip
         self.attenuation  = 3 # Exponent to smooth the labels, choose odd numbers, not too big
         self.SDmode       = SDmode #reg, cla
+        self.num_data = num_data
 
         self.fnames       = []
         self.outcome      = []
@@ -46,6 +48,8 @@ class EchoSet(torch.utils.data.Dataset):
             splitIndex    = self.header.index("Split")
             efIndex       = self.header.index("EF")
             fpsIndex      = self.header.index("FPS")
+            total = 0
+
             for line in f:
                 lineSplit = line.strip().split(',')
                 
@@ -65,6 +69,11 @@ class EchoSet(torch.utils.data.Dataset):
                     self.outcome.append(lineSplit)
                     self.ejection.append(float(ef))
                     self.fps.append(int(fps))
+                
+                total += 1
+
+                if total >= self.num_data and self.num_data is not None:
+                    break
                     
 
         self.frames = collections.defaultdict(list)
