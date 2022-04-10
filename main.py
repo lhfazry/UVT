@@ -1,10 +1,14 @@
 import os
 import Network
+import argparse
 
+parser = argparse.ArgumentParser()
+parser.add_argument("--datasets", type=str, default="datasets", help="Path ke datasets")
+params = parser.parse_args()
 
 if __name__ == '__main__':
 
-    dataset_path = "/content/datasets"
+    dataset_path = params.datasets
 
     Network.train(  dataset_path=dataset_path,  # path to the dataset folder containing the "Videos" foldes and "FileList.csv" file
                     num_epochs=5,               # number of epoch to train
