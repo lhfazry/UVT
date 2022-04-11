@@ -52,7 +52,7 @@ if __name__ == '__main__':
                     latent_dim=latent_dim,            # embedding dimension
                     num_hidden_layers=num_hidden_layers,       # Number of Transformers
                     intermediate_size=intermediate_size,     # Size of the main MLP inside of the Transformers
-                    model_path="./output/UVT_repeat_reg",# path of trained weight
+                    model_path="output/UVT_repeat_reg",# path of trained weight
                     device=[0],
                     num_data = [40]
                     )
