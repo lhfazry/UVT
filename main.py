@@ -35,7 +35,7 @@ if __name__ == '__main__':
                     lr_step_period=3,           # number of epoch before dividing the learning rate by 10
                     ds_max_length = max_seq_length,        # maximum number of frame during training
                     ds_min_spacing = 10,        # minimum number of frame during training
-                    DTmode = 'sample',          # data preprocessing method: 'repeat' (mirroring) / 'full' (entire video) / 'sample' (single heartbeat with random amounf of additional frames)
+                    DTmode = 'repeat',          # data preprocessing method: 'repeat' (mirroring) / 'full' (entire video) / 'sample' (single heartbeat with random amounf of additional frames)
                     SDmode = 'reg',             # SD branch network type: reg (regression) or cla (classification)
                     num_hidden_layers = num_hidden_layers,     # Number of Transformers
                     intermediate_size = intermediate_size,   # size of the main MLP inside of the Transformers
@@ -49,9 +49,9 @@ if __name__ == '__main__':
     Network.test(   dataset_path=dataset_path,  # Path to the dataset folder containing the "Videos" foldes and "FileList.csv" file
                     SDmode='reg',               # SD branch network type: reg (regression) or cla (classification)
                     use_full_videos=True,       # Use full video (no preprocessing other than intensity scaling)
-                    latent_dim=1024,            # embedding dimension
-                    num_hidden_layers=16,       # Number of Transformers
-                    intermediate_size=8192,     # Size of the main MLP inside of the Transformers
+                    latent_dim=latent_dim,            # embedding dimension
+                    num_hidden_layers=num_hidden_layers,       # Number of Transformers
+                    intermediate_size=intermediate_size,     # Size of the main MLP inside of the Transformers
                     model_path="./output/UVT_repeat_reg",# path of trained weight
                     device=[0],
                     num_data = [40]
