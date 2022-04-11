@@ -6,6 +6,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--datasets", type=str, default="datasets", help="Path ke datasets")
 parser.add_argument("--attention_heads", type=int, default="16", help="Attention Heads")
 parser.add_argument("--intermediate_size", type=int, default="8192", help="Intermediate Size")
+parser.add_argument("--num_hidden_layers", type=int, default="16", help="Transfomer block size")
+parser.add_argument("--rm_branch", type=str, default="SD", help="RM Branch")
 
 params = parser.parse_args()
 
@@ -14,6 +16,8 @@ if __name__ == '__main__':
     dataset_path = params.datasets
     attention_heads = params.attention_heads
     intermediate_size = params.intermediate_size
+    num_hidden_layers = params.num_hidden_layers
+    rm_branch = params.rm_branch
 
     Network.train(  dataset_path=dataset_path,  # path to the dataset folder containing the "Videos" foldes and "FileList.csv" file
                     num_epochs=5,               # number of epoch to train
@@ -29,9 +33,9 @@ if __name__ == '__main__':
                     ds_min_spacing = 10,        # minimum number of frame during training
                     DTmode = 'sample',          # data preprocessing method: 'repeat' (mirroring) / 'full' (entire video) / 'sample' (single heartbeat with random amounf of additional frames)
                     SDmode = 'reg',             # SD branch network type: reg (regression) or cla (classification)
-                    num_hidden_layers = 16,     # Number of Transformers
+                    num_hidden_layers = num_hidden_layers,     # Number of Transformers
                     intermediate_size = intermediate_size,   # size of the main MLP inside of the Transformers
-                    rm_branch = None,           # select branch to not train: None, 'SD', 'EF'
+                    rm_branch = rm_branch,           # select branch to not train: None, 'SD', 'EF'
                     use_conv = False,           # use convolutions instead of MLP for the regressors - worse results
                     attention_heads = attention_heads,        # number of attention heads in each Transformer
                     num_data = [200, 40]
